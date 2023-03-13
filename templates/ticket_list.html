@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Ticket List</h1>
+  <ul>
+    {% for ticket in tickets %}
+      <li>
+        <h2><a href="{% url 'ticket_detail' ticket.id %}">{{ ticket.title }}</a></h2>
+        <p>{{ ticket.description }}</p>
+        <p>Created: {{ ticket.created_at }}</p>
+        {% if ticket.is_closed %}
+          <p>Closed</p>
+        {% else %}
+          <p>Open</p>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No tickets yet.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'create_ticket' %}">Create a Ticket</a>
+{% endblock %}
